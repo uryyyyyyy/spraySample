@@ -1,4 +1,4 @@
-package com.example
+package com.github.uryyyyyyy.spray.helloWorld
 
 import akka.actor.{ActorSystem, Props}
 import akka.io.IO

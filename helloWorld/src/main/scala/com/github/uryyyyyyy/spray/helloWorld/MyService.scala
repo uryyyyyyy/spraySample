@@ -1,4 +1,4 @@
-package com.example
+package com.github.uryyyyyyy.spray.helloWorld
 
 import akka.actor.Actor
 import spray.routing._
