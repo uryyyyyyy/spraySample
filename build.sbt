@@ -31,3 +31,6 @@ lazy val helloWorld2 = (project in file("helloWorld2")).
 
 lazy val routing = (project in file("routing")).
 		settings(commonSettings: _*)
+
+lazy val cache = (project in file("cache")).
+	settings(commonSettings: _*)
