@@ -1,32 +1,29 @@
-//package com.github.uryyyyyyy.spray.helloWorld
-//
-//import org.specs2.mutable.Specification
-//import spray.testkit.Specs2RouteTest
-//import spray.http._
-//import StatusCodes._
-//
-//class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
-//  def actorRefFactory = system
-//
-//  "MyService" should {
-//
-//    "return a greeting for GET requests to the root path" in {
-//      Get() ~> myRoute ~> check {
-//        responseAs[String] must contain("Say hello")
-//      }
-//    }
-//
-//    "leave GET requests to other paths unhandled" in {
-//      Get("/kermit") ~> myRoute ~> check {
-//        handled must beFalse
-//      }
-//    }
-//
-//    "return a MethodNotAllowed error for PUT requests to the root path" in {
-//      Put() ~> sealRoute(myRoute) ~> check {
-//        status === MethodNotAllowed
-//        responseAs[String] === "HTTP method not allowed, supported methods: GET"
-//      }
-//    }
-//  }
-//}
+package com.github.uryyyyyyy.spray.helloWorld
+
+import org.scalatest.{FunSpec, MustMatchers}
+import spray.http.StatusCodes
+import spray.routing.HttpService._
+import spray.testkit.ScalatestRouteTest
+
+class MyServiceSpec extends FunSpec with MustMatchers with ScalatestRouteTest {
+
+  describe("test") {
+
+    it("test1") {
+      val myService2 = new MyService2()
+      Get("/service2/3") ~> sealRoute(myService2.myRoute) ~> check {
+        status mustBe StatusCodes.OK
+        body.contentType.mediaType.value mustBe "text/plain"
+        body.contentType.definedCharset.get.value mustBe "UTF-8"
+        body.data.asString mustBe "OK 3"
+      }
+    }
+
+    it("test2") {
+      val myService2 = new MyService2()
+      Post("/service2/3") ~> sealRoute(myService2.myRoute) ~> check {
+        status mustBe StatusCodes.MethodNotAllowed
+      }
+    }
+  }
+}
